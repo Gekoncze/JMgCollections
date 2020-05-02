@@ -1,5 +1,5 @@
 #### DONE
-
+fixed trim in text collections
 
 #### NOW
     Text - splitByCammelCase - make sure it works correctly in all cases

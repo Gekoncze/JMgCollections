@@ -154,23 +154,17 @@ public interface ReadableText extends ReadableArray<Character> {
     public ReadableText slice(Integer begin, Integer end);
 
     public default ReadableText trim(){
-        Integer begin = null;
-        Integer end = null;
-        boolean stop = false;
-        for(int i = 0; i < count(); i++){
-            if(!Character.isWhitespace(get(i))){
-                begin = i;
-                for(i = i + 1; i < count(); i++){
-                    if(Character.isWhitespace(get(i))){
-                        end = i;
-                        stop = true;
-                    }
-                    if(stop) break;
-                }
-            }
-            if(stop) break;
+        int begin;
+        int end;
+
+        for(begin = 0; begin < count(); begin++){
+            if(!Character.isWhitespace(get(begin))) break;
         }
-        if(begin == null) return slice(0, 0);
+
+        for(end = count(); end > 0; end--){
+            if(!Character.isWhitespace(get(end-1))) break;
+        }
+
         return slice(begin, end);
     }
 
