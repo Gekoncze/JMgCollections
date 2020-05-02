@@ -2,7 +2,7 @@
 
 
 #### NOW
-
+    Text - splitByCammelCase - make sure it works correctly in all cases
 
 #### SOON
     add full implementation for editable text

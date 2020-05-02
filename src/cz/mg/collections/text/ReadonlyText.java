@@ -163,6 +163,7 @@ public class ReadonlyText implements ReadableText {
         return new ReadonlyText(new Array<>(splitByCammelCase()).toText("_")).upperCase();
     }
 
+    @Override
     public ReadonlyText slice(Integer begin, Integer end) {
         if(begin == null) begin = 0;
         if(end == null) end = count();
@@ -174,118 +175,7 @@ public class ReadonlyText implements ReadableText {
         return new ReadonlyText(string.substring(begin, end));
     }
 
-    public ReadonlyText trim(){
-        Integer begin = null;
-        Integer end = null;
-        boolean stop = false;
-        for(int i = 0; i < count(); i++){
-            if(!Character.isWhitespace(get(i))){
-                begin = i;
-                for(i = i + 1; i < count(); i++){
-                    if(Character.isWhitespace(get(i))){
-                        end = i;
-                        stop = true;
-                    }
-                    if(stop) break;
-                }
-            }
-            if(stop) break;
-        }
-        if(begin == null) return slice(0, 0);
-        return slice(begin, end);
-    }
 
-    public Array<ReadonlyText> splitByEach(Character delim){
-        if(delim == null) return new Array<ReadonlyText>(this);
-        return splitByEach("" + delim);
-    }
-
-    public Array<ReadonlyText> splitByEach(String delims){
-        if(delims == null) return new Array<ReadonlyText>(this);
-        List<ReadonlyText> parts = new List<>();
-        int begin = 0;
-        int end = 0;
-        for(int i = 0; i < count(); i++){
-            char ch = get(i);
-            for(int j = 0; j < delims.length(); j++){
-                char d = delims.charAt(j);
-                if(ch == d) {
-                    end = i;
-                    parts.addLast(slice(begin, end));
-                    begin = end + 1;
-                }
-            }
-        }
-        if(begin <= count()) parts.addLast(slice(begin, null));
-        return new Array<>(parts);
-    }
-
-    public Array<ReadonlyText> splitByEach(ReadonlyText delims){
-        if(delims == null) return new Array<ReadonlyText>(this);
-        return splitByEach(delims.toString());
-    }
-
-    public Array<ReadonlyText> splitByEachNoBlank(Character delim){
-        if(delim == null) return new Array<ReadonlyText>(this);
-        return splitByEachNoBlank("" + delim);
-    }
-
-    public Array<ReadonlyText> splitByEachNoBlank(String delims){
-        if(delims == null) return new Array<ReadonlyText>(this);
-        Array<ReadonlyText> parts = splitByEach(delims);
-        List<ReadonlyText> partsNoBlank = new List<>();
-        for(ReadonlyText part : parts) if(part != null) if(part.count() > 0) partsNoBlank.addLast(part);
-        return new Array<>(partsNoBlank);
-    }
-
-    public Array<ReadonlyText> splitByEachNoBlank(ReadonlyText delims){
-        if(delims == null) return new Array<ReadonlyText>(this);
-        return splitByEachNoBlank(delims.toString());
-    }
-
-    public Array<ReadonlyText> splitByWhole(Character delim){
-        return splitByWhole("" + delim);
-    }
-
-    public Array<ReadonlyText> splitByWhole(String delim){
-        Integer index;
-        ReadonlyText before = null;
-        ReadonlyText after = this;
-        List<ReadonlyText> parts = new List<>();
-        while((index = after.findFirst(delim)) != null){
-            before = after.slice(null, index);
-            after = after.slice(index + delim.length(), null);
-            parts.addLast(before);
-        }
-        parts.addLast(after);
-        return new Array<>(parts);
-    }
-
-    public Array<ReadonlyText> splitByWhole(ReadonlyText delim){
-        return splitByWhole(delim.toString());
-    }
-
-    public Array<ReadonlyText> splitByWholeNoBlank(Character delim){
-        return splitByWholeNoBlank(delim + "");
-    }
-
-    public Array<ReadonlyText> splitByWholeNoBlank(String delim){
-        Array<ReadonlyText> withBlank = splitByWhole(delim);
-        List<ReadonlyText> withouthBlank = new List<>();
-        for(ReadonlyText t : withBlank) if(t != null) if(t.count() > 0) withouthBlank.addLast(t);
-        return new Array<>(withouthBlank);
-    }
-
-    public Array<ReadonlyText> splitByWholeNoBlank(ReadonlyText delim){
-        return splitByWholeNoBlank(delim.toString());
-    }
-
-    public Array<ReadonlyText> splitByCammelCase() {
-        String[] parts = toString().split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-        Array<ReadonlyText> p = new Array<>(parts.length);
-        for(int i = 0; i < parts.length; i++) p.set(i, new ReadonlyText(parts[i]));
-        return p;
-    }
 
     public ReadonlyText repeat(int count){
         StringBuilder result = new StringBuilder();

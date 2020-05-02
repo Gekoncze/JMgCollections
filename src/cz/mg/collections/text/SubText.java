@@ -1,9 +1,5 @@
 package cz.mg.collections.text;
 
-import cz.mg.collections.array.Array;
-import cz.mg.collections.list.List;
-
-
 public class SubText implements ReadableText {
     protected final String string;
     protected final int begin;
@@ -84,118 +80,9 @@ public class SubText implements ReadableText {
         return string.charAt(begin + i);
     }
 
+    @Override
     public SubText slice(Integer begin, Integer end){
         return new SubText(this, begin, end);
-    }
-
-    public SubText trim(){
-        Integer begin = null;
-        Integer end = null;
-        boolean stop = false;
-        for(int i = 0; i < count(); i++){
-            if(!Character.isWhitespace(get(i))){
-                begin = i;
-                for(i = i + 1; i < count(); i++){
-                    if(Character.isWhitespace(get(i))){
-                        end = i;
-                        stop = true;
-                    }
-                    if(stop) break;
-                }
-            }
-            if(stop) break;
-        }
-        if(begin == null) return slice(0, 0);
-        return slice(begin, end);
-    }
-
-    public Array<SubText> splitByEach(Character delim){
-        if(delim == null) return new Array<SubText>(this);
-        return splitByEach("" + delim);
-    }
-
-    public Array<SubText> splitByEach(String delims){
-        if(delims == null) return new Array<SubText>(this);
-        List<SubText> parts = new List<>();
-        int begin = 0;
-        int end = 0;
-        for(int i = 0; i < count(); i++){
-            char ch = get(i);
-            for(int j = 0; j < delims.length(); j++){
-                char d = delims.charAt(j);
-                if(ch == d) {
-                    end = i;
-                    parts.addLast(slice(begin, end));
-                    begin = end + 1;
-                }
-            }
-        }
-        if(begin <= count()) parts.addLast(slice(begin, null));
-        return new Array<>(parts);
-    }
-
-    public Array<SubText> splitByEach(SubText delims){
-        if(delims == null) return new Array<SubText>(this);
-        return splitByEach(delims.toString());
-    }
-
-    public Array<SubText> splitByEachNoBlank(Character delim){
-        if(delim == null) return new Array<SubText>(this);
-        return splitByEachNoBlank("" + delim);
-    }
-
-    public Array<SubText> splitByEachNoBlank(String delims){
-        if(delims == null) return new Array<SubText>(this);
-        Array<SubText> parts = splitByEach(delims);
-        List<SubText> partsNoBlank = new List<>();
-        for(SubText part : parts) if(part != null) if(part.count() > 0) partsNoBlank.addLast(part);
-        return new Array<>(partsNoBlank);
-    }
-
-    public Array<SubText> splitByEachNoBlank(SubText delims){
-        if(delims == null) return new Array<SubText>(this);
-        return splitByEachNoBlank(delims.toString());
-    }
-
-    public Array<SubText> splitByWhole(Character delim){
-        return splitByWhole("" + delim);
-    }
-
-    public Array<SubText> splitByWhole(String delim){
-        Integer index;
-        SubText before = null;
-        SubText after = this;
-        List<SubText> parts = new List<>();
-        while((index = after.findFirst(delim)) != null){
-            before = after.slice(null, index);
-            after = after.slice(index + delim.length(), null);
-            parts.addLast(before);
-        }
-        parts.addLast(after);
-        return new Array<>(parts);
-    }
-
-    public Array<SubText> splitByWhole(SubText delim){
-        return splitByWhole(delim.toString());
-    }
-
-    public Array<SubText> splitByWholeNoBlank(Character delim){
-        return splitByWholeNoBlank(delim + "");
-    }
-
-    public Array<SubText> splitByWholeNoBlank(String delim){
-        Array<SubText> withBlank = splitByWhole(delim);
-        List<SubText> withouthBlank = new List<>();
-        for(SubText t : withBlank) if(t != null) if(t.count() > 0) withouthBlank.addLast(t);
-        return new Array<>(withouthBlank);
-    }
-
-    public Array<SubText> splitByWholeNoBlank(SubText delim){
-        return splitByWholeNoBlank(delim.toString());
-    }
-
-    public Array<SubText> splitByCamelCase(){
-        throw new UnsupportedOperationException("Coming soon...");
     }
 
     @Override

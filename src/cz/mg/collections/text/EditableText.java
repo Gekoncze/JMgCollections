@@ -84,6 +84,18 @@ public class EditableText implements ReadableText, WriteableText {
     }
 
     @Override
+    public EditableText slice(Integer begin, Integer end) {
+        if(begin == null) begin = 0;
+        if(end == null) end = count();
+        if(begin < 0) begin = 0;
+        if(end < 0) end = 0;
+        if(begin > count()) begin = count();
+        if(end > count()) end = count();
+        if(end - begin <= 0) return new EditableText();
+        return new EditableText(stringBuilder.substring(begin, end));
+    }
+
+    @Override
     public boolean equals(Object o) {
         if(o == null) return false;
         if(o instanceof String) return toString().equals(o.toString());

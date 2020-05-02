@@ -1,6 +1,8 @@
 package cz.mg.collections.text;
 
+import cz.mg.collections.array.Array;
 import cz.mg.collections.array.ReadableArray;
+import cz.mg.collections.list.List;
 
 
 public interface ReadableText extends ReadableArray<Character> {
@@ -147,6 +149,121 @@ public interface ReadableText extends ReadableArray<Character> {
 
     public default double parseDouble(){
         return Double.parseDouble(toString());
+    }
+
+    public ReadableText slice(Integer begin, Integer end);
+
+    public default ReadableText trim(){
+        Integer begin = null;
+        Integer end = null;
+        boolean stop = false;
+        for(int i = 0; i < count(); i++){
+            if(!Character.isWhitespace(get(i))){
+                begin = i;
+                for(i = i + 1; i < count(); i++){
+                    if(Character.isWhitespace(get(i))){
+                        end = i;
+                        stop = true;
+                    }
+                    if(stop) break;
+                }
+            }
+            if(stop) break;
+        }
+        if(begin == null) return slice(0, 0);
+        return slice(begin, end);
+    }
+
+    public default Array<ReadableText> splitByEach(Character delim){
+        if(delim == null) return new Array<ReadableText>(this);
+        return splitByEach("" + delim);
+    }
+
+    public default Array<ReadableText> splitByEach(String delims){
+        if(delims == null) return new Array<ReadableText>(this);
+        List<ReadableText> parts = new List<>();
+        int begin = 0;
+        int end = 0;
+        for(int i = 0; i < count(); i++){
+            char ch = get(i);
+            for(int j = 0; j < delims.length(); j++){
+                char d = delims.charAt(j);
+                if(ch == d) {
+                    end = i;
+                    parts.addLast(slice(begin, end));
+                    begin = end + 1;
+                }
+            }
+        }
+        if(begin <= count()) parts.addLast(slice(begin, null));
+        return new Array<>(parts);
+    }
+
+    public default Array<ReadableText> splitByEach(ReadableText delims){
+        if(delims == null) return new Array<ReadableText>(this);
+        return splitByEach(delims.toString());
+    }
+
+    public default Array<ReadableText> splitByEachNoBlank(Character delim){
+        if(delim == null) return new Array<ReadableText>(this);
+        return splitByEachNoBlank("" + delim);
+    }
+
+    public default Array<ReadableText> splitByEachNoBlank(String delims){
+        if(delims == null) return new Array<ReadableText>(this);
+        Array<ReadableText> parts = splitByEach(delims);
+        List<ReadableText> partsNoBlank = new List<>();
+        for(ReadableText part : parts) if(part != null) if(part.count() > 0) partsNoBlank.addLast(part);
+        return new Array<>(partsNoBlank);
+    }
+
+    public default Array<ReadableText> splitByEachNoBlank(ReadableText delims){
+        if(delims == null) return new Array<ReadableText>(this);
+        return splitByEachNoBlank(delims.toString());
+    }
+
+    public default Array<ReadableText> splitByWhole(Character delim){
+        return splitByWhole("" + delim);
+    }
+
+    public default Array<ReadableText> splitByWhole(String delim){
+        Integer index;
+        ReadableText before = null;
+        ReadableText after = this;
+        List<ReadableText> parts = new List<>();
+        while((index = after.findFirst(delim)) != null){
+            before = after.slice(null, index);
+            after = after.slice(index + delim.length(), null);
+            parts.addLast(before);
+        }
+        parts.addLast(after);
+        return new Array<>(parts);
+    }
+
+    public default Array<ReadableText> splitByWhole(ReadableText delim){
+        return splitByWhole(delim.toString());
+    }
+
+    public default Array<ReadableText> splitByWholeNoBlank(Character delim){
+        return splitByWholeNoBlank(delim + "");
+    }
+
+    public default Array<ReadableText> splitByWholeNoBlank(String delim){
+        Array<ReadableText> withBlank = splitByWhole(delim);
+        List<ReadableText> withouthBlank = new List<>();
+        for(ReadableText t : withBlank) if(t != null) if(t.count() > 0) withouthBlank.addLast(t);
+        return new Array<>(withouthBlank);
+    }
+
+    public default Array<ReadableText> splitByWholeNoBlank(ReadableText delim){
+        return splitByWholeNoBlank(delim.toString());
+    }
+
+    public default Array<ReadonlyText> splitByCammelCase() { // TODO - make sure it works correctly in all cases
+        String[] parts = toString().split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+        Array<ReadonlyText> p = new Array<>(parts.length);
+        for(int i = 0; i < parts.length; i++) p.set(i, new ReadonlyText(parts[i]));
+        return p;
     }
 
 // Java does not support overriding object methods in interface
