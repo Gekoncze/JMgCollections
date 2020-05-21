@@ -1,15 +1,17 @@
-package cz.mg.collections;
+package cz.mg.collections.special;
+
+import cz.mg.collections.Clump;
 
 import java.util.Iterator;
 
 
 public class VirtualCollection<T> implements Clump<T> {
     private final Class<T> clazz;
-    private final Collection collection;
+    private final Clump collection;
 
-    public VirtualCollection(Class<T> clazz, Collection collection) {
+    public VirtualCollection(Class<T> clazz, Clump clump) {
         this.clazz = clazz;
-        this.collection = collection;
+        this.collection = clump;
     }
 
     @Override
@@ -19,7 +21,7 @@ public class VirtualCollection<T> implements Clump<T> {
 
     private class Filter implements Iterator<T> {
         private final Iterator iterator;
-        private T current = null;
+        private T current;
 
         public Filter(Iterator iterator) {
             this.iterator = iterator;

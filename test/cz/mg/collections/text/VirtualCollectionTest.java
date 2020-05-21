@@ -1,6 +1,6 @@
 package cz.mg.collections.text;
 
-import cz.mg.collections.VirtualCollection;
+import cz.mg.collections.special.VirtualCollection;
 import cz.mg.collections.list.List;
 
 
@@ -42,31 +42,35 @@ public class VirtualCollectionTest {
     }
 
     public static void main(String[] args) {
-        System.out.println("### TEST 1 ###");
         test(new List<Life>(
                 new Plant("Rose"),
                 new Plant("Dandelion"),
                 new Cat("Neko"),
                 new Dog("Inu"),
                 new Cat("Meow"),
-                new Animal("Unknown")
+                new Animal("Some animal")
         ));
-        System.out.println();
 
-        System.out.println("### TEST 2 ###");
-        test(new List<Life>(
-        ));
-        System.out.println();
+        test(new List<Life>());
     }
 
+    private static int id = 0;
     public static void test(List<Life> lifeOnEarth){
+        System.out.println("#### TEST " + (id++) + " ###");
+
         VirtualCollection<Plant> plants = new VirtualCollection<>(Plant.class, lifeOnEarth);
+        VirtualCollection<Animal> animals = new VirtualCollection<>(Animal.class, lifeOnEarth);
         VirtualCollection<Cat> cats = new VirtualCollection<>(Cat.class, lifeOnEarth);
         VirtualCollection<Dog> dogs = new VirtualCollection<>(Dog.class, lifeOnEarth);
 
         System.out.println("Plants:");
         for(Plant plant : plants){
             System.out.println("    " + plant.getName());
+        }
+
+        System.out.println("Animals:");
+        for(Animal animal : animals){
+            System.out.println("    " + animal.getName());
         }
 
         System.out.println("Cats:");
@@ -78,5 +82,8 @@ public class VirtualCollectionTest {
         for(Dog dog : dogs){
             System.out.println("    " + dog.getName());
         }
+
+        System.out.println();
+        System.out.println();
     }
 }
