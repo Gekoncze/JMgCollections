@@ -40,6 +40,24 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
     }
 
     @Override
+    public void setFirst(T data) {
+        ListItem<T> item = getFirstItem();
+        if(item != null) item.setData(data);
+    }
+
+    @Override
+    public void setLast(T data) {
+        ListItem<T> item = getLastItem();
+        if(item != null) item.setData(data);
+    }
+
+    @Override
+    public void set(T data, int i) {
+        ListItem<T> item = getItem(i);
+        if(item != null) item.setData(data);
+    }
+
+    @Override
     public ListItem<T> getFirstItem() {
         return firstItem;
     }
@@ -78,7 +96,7 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
     }
 
     @Override
-    public void add(int i, T data) {
+    public void add(T data, int i) {
         if(count() == 0 && i == 0) addFirst(data);
         else getItem(i).addPrevious(data);
     }

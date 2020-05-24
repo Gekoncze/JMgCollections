@@ -1,5 +1,8 @@
 #### DONE
-fixed trim in text collections
+major backward incompatible changes
+for set, I changed the order of data and indices
+added/improved multidimensional arrays
+added readonly array
 
 #### NOW
     Text - splitByCammelCase - make sure it works correctly in all cases

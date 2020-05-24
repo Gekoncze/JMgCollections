@@ -1,22 +1,22 @@
 package cz.mg.collections.text;
 
-public class EditableText implements ReadableText, WriteableText {
+public class Text implements ReadableText, WriteableText {
     private final StringBuilder stringBuilder;
 
-    public EditableText() {
+    public Text() {
         this.stringBuilder = new StringBuilder("");
     }
 
-    public EditableText(String string) {
+    public Text(String string) {
         this.stringBuilder = new StringBuilder(string);
     }
 
-    public EditableText(ReadableText text) {
+    public Text(ReadableText text) {
         this.stringBuilder = new StringBuilder(text.toString());
     }
 
     @Override
-    public void set(int i, Character data) {
+    public void set(Character data, int i) {
         stringBuilder.setCharAt(i, data);
     }
 
@@ -84,15 +84,15 @@ public class EditableText implements ReadableText, WriteableText {
     }
 
     @Override
-    public EditableText slice(Integer begin, Integer end) {
+    public Text slice(Integer begin, Integer end) {
         if(begin == null) begin = 0;
         if(end == null) end = count();
         if(begin < 0) begin = 0;
         if(end < 0) end = 0;
         if(begin > count()) begin = count();
         if(end > count()) end = count();
-        if(end - begin <= 0) return new EditableText();
-        return new EditableText(stringBuilder.substring(begin, end));
+        if(end - begin <= 0) return new Text();
+        return new Text(stringBuilder.substring(begin, end));
     }
 
     @Override

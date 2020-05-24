@@ -1,6 +1,6 @@
 package cz.mg.collections;
 
-import cz.mg.collections.text.EditableText;
+import cz.mg.collections.text.Text;
 import cz.mg.collections.text.ReadableText;
 import cz.mg.collections.text.ReadonlyText;
 
@@ -90,7 +90,7 @@ public interface Clump<T> extends Iterable<T> {
     }
 
     public default ReadableText toText(String prefix, String delim, String postfix, Converter<T> converter) {
-        EditableText text = new EditableText();
+        Text text = new Text();
         text.append(prefix);
 
         boolean first = true;
