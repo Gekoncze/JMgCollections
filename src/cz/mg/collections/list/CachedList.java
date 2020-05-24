@@ -36,7 +36,7 @@ public class CachedList<T> extends List<T> {
         array = new Array<>(count());
         int i = 0;
         for(ListItem<T> item = getFirstItem(); item != null; item = item.getNextItem()){
-            array.set(i, item);
+            array.set(item, i);
             i++;
         }
     }
