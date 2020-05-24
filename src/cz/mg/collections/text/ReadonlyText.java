@@ -1,6 +1,5 @@
 package cz.mg.collections.text;
 
-import cz.mg.collections.array.Array;
 import cz.mg.collections.list.List;
 
 
@@ -159,9 +158,9 @@ public class ReadonlyText implements ReadableText {
         return new ReadonlyText(r.toText(""));
     }
 
-    public ReadonlyText camelToUpper(){
-        return new ReadonlyText(new Array<>(splitByCammelCase()).toText("_")).upperCase();
-    }
+//    public ReadonlyText camelToUpper(){
+//        return new ReadonlyText(new Array<>(splitByCammelCase()).toText("_")).upperCase();
+//    }
 
     @Override
     public ReadonlyText slice(Integer begin, Integer end) {
@@ -174,8 +173,6 @@ public class ReadonlyText implements ReadableText {
         if(end - begin <= 0) return new ReadonlyText();
         return new ReadonlyText(string.substring(begin, end));
     }
-
-
 
     public ReadonlyText repeat(int count){
         StringBuilder result = new StringBuilder();

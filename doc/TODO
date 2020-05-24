@@ -1,8 +1,6 @@
 #### DONE
-major backward incompatible changes
-for set, I changed the order of data and indices
-added/improved multidimensional arrays
-added readonly array
+text fixes
+renamed editable text to text (in previous commit)
 
 #### NOW
     Text - splitByCammelCase - make sure it works correctly in all cases

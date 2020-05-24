@@ -253,12 +253,12 @@ public interface ReadableText extends ReadableArray<Character> {
         return splitByWholeNoBlank(delim.toString());
     }
 
-    public default Array<ReadonlyText> splitByCammelCase() { // TODO - make sure it works correctly in all cases
-        String[] parts = toString().split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-        Array<ReadonlyText> p = new Array<>(parts.length);
-        for(int i = 0; i < parts.length; i++) p.set(i, new ReadonlyText(parts[i]));
-        return p;
-    }
+//    public default Array<ReadonlyText> splitByCammelCase() { // TODO - make sure it works correctly in all cases
+//        String[] parts = toString().split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+//        Array<ReadonlyText> p = new Array<>(parts.length);
+//        for(int i = 0; i < parts.length; i++) p.set(new ReadonlyText(parts[i]), i);
+//        return p;
+//    }
 
 // Java does not support overriding object methods in interface
 // This code snippet serves as a template for implementing classes
