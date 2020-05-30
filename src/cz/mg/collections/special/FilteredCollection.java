@@ -1,17 +1,16 @@
 package cz.mg.collections.special;
 
 import cz.mg.collections.Clump;
-
 import java.util.Iterator;
 
 
-public class VirtualCollection<T> implements Clump<T> {
-    private final Clump clump;
-    private final Class<T> clazz;
+public class FilteredCollection<T> implements Clump<T> {
+    private final Clump<T> clump;
+    private final Filter<T> filter;
 
-    public VirtualCollection(Clump clump, Class<T> clazz) {
+    public FilteredCollection(Clump<T> clump, Filter<T> filter) {
         this.clump = clump;
-        this.clazz = clazz;
+        this.filter = filter;
     }
 
     @Override
@@ -20,20 +19,19 @@ public class VirtualCollection<T> implements Clump<T> {
     }
 
     private class FilterIterator implements Iterator<T> {
-        private final Iterator iterator;
+        private final Iterator<T> iterator;
         private T current;
 
-        public FilterIterator(Iterator iterator) {
+        public FilterIterator(Iterator<T> iterator) {
             this.iterator = iterator;
             this.current = move();
         }
 
-        @SuppressWarnings("unchecked")
         private T move(){
             while(iterator.hasNext()){
-                Object object = iterator.next();
-                if(clazz.isInstance(object)){
-                    return (T) object;
+                T object = iterator.next();
+                if(filter.shallPass(object)){
+                    return object;
                 }
             }
             return null;
@@ -50,5 +48,9 @@ public class VirtualCollection<T> implements Clump<T> {
             current = move();
             return result;
         }
+    }
+
+    public interface Filter<T> {
+        boolean shallPass(T data);
     }
 }

@@ -20,15 +20,15 @@ public class CompositeCollection<T> implements Clump<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Glue(clumps.iterator());
+        return new GlueIterator(clumps.iterator());
     }
 
-    private class Glue implements Iterator<T> {
+    private class GlueIterator implements Iterator<T> {
         private final Iterator<Clump<T>> iterators;
         private Iterator<T> currentIterator = null;
         private T current;
 
-        public Glue(Iterator<Clump<T>> iterators) {
+        public GlueIterator(Iterator<Clump<T>> iterators) {
             this.iterators = iterators;
             this.current = move();
         }
