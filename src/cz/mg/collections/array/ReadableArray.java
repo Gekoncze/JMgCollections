@@ -27,6 +27,7 @@ public interface ReadableArray<T> extends ReadableCollection<T> {
 
             @Override
             public T next() {
+                if(!hasNext()) return null;
                 return get(i++);
             }
         };

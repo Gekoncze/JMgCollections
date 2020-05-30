@@ -39,6 +39,19 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
 
     @Override
     public Iterator<V> iterator() {
-        return hashMap.values().iterator();
+        return new Iterator<V>() {
+            private Iterator<V> iterator = hashMap.values().iterator();
+
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public V next() {
+                if(!hasNext()) return null;
+                return iterator.next();
+            }
+        };
     }
 }

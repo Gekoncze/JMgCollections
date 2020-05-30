@@ -61,6 +61,7 @@ public class CompositeCollection<T> implements Clump<T> {
 
         @Override
         public T next() {
+            if(!hasNext()) return null;
             T result = current;
             current = move();
             return result;

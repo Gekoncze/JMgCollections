@@ -193,6 +193,7 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
 
             @Override
             public T next() {
+                if(!hasNext()) return null;
                 T rval = current.get();
                 current = current.getNextItem();
                 return rval;
