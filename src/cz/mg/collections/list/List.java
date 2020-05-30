@@ -1,7 +1,6 @@
 package cz.mg.collections.list;
 
 import cz.mg.collections.Collection;
-
 import java.util.Iterator;
 
 
@@ -17,7 +16,7 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
         for(T item : array) addLast(item);
     }
     
-    public List(Collection<T> collection) {
+    public List(Iterable<T> collection) {
         for(T item : collection) addLast(item);
     }
     
