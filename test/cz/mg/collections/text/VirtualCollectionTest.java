@@ -58,10 +58,10 @@ public class VirtualCollectionTest {
     public static void test(List<Life> lifeOnEarth){
         System.out.println("#### TEST " + (id++) + " ###");
 
-        VirtualCollection<Plant> plants = new VirtualCollection<>(Plant.class, lifeOnEarth);
-        VirtualCollection<Animal> animals = new VirtualCollection<>(Animal.class, lifeOnEarth);
-        VirtualCollection<Cat> cats = new VirtualCollection<>(Cat.class, lifeOnEarth);
-        VirtualCollection<Dog> dogs = new VirtualCollection<>(Dog.class, lifeOnEarth);
+        VirtualCollection<Plant> plants = new VirtualCollection<>(lifeOnEarth, Plant.class);
+        VirtualCollection<Animal> animals = new VirtualCollection<>(lifeOnEarth, Animal.class);
+        VirtualCollection<Cat> cats = new VirtualCollection<>(lifeOnEarth, Cat.class);
+        VirtualCollection<Dog> dogs = new VirtualCollection<>(lifeOnEarth, Dog.class);
 
         System.out.println("Plants:");
         for(Plant plant : plants){
