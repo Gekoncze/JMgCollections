@@ -21,6 +21,16 @@ public class Text implements ReadableText, WriteableText {
     }
 
     @Override
+    public void setFirst(Character data) {
+        set(data, 0);
+    }
+
+    @Override
+    public void setLast(Character data) {
+        set(data, count() - 1);
+    }
+
+    @Override
     public void clear() {
         stringBuilder.delete(0, stringBuilder.length());
     }

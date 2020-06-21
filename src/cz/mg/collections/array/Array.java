@@ -40,7 +40,17 @@ public class Array<T> implements ReadableArray<T>, WriteableArray<T>, Collection
         if(i < 0 || i >= count()) return;
         array[i] = data;
     }
-    
+
+    @Override
+    public void setFirst(T data) {
+        set(data, 0);
+    }
+
+    @Override
+    public void setLast(T data) {
+        set(data, count() - 1);
+    }
+
     @Override
     public int count(){
         return array.length;
