@@ -38,6 +38,11 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
     }
 
     @Override
+    public void clear(K key) {
+        hashMap.remove(key);
+    }
+
+    @Override
     public Iterator<V> iterator() {
         return new Iterator<V>() {
             private Iterator<V> iterator = hashMap.values().iterator();
