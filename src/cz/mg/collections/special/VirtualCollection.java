@@ -10,6 +10,7 @@ public class VirtualCollection<T> implements Clump<T> {
     private final Class<T> clazz;
 
     public VirtualCollection(Clump clump, Class<T> clazz) {
+        if(clump == null) throw new NullPointerException();
         this.clump = clump;
         this.clazz = clazz;
     }

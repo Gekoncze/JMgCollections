@@ -9,6 +9,7 @@ public class FilteredCollection<T> implements Clump<T> {
     private final Filter<T> filter;
 
     public FilteredCollection(Clump<T> clump, Filter<T> filter) {
+        if(clump == null) throw new NullPointerException();
         this.clump = clump;
         this.filter = filter;
     }
