@@ -38,8 +38,12 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
     }
 
     @Override
-    public void clear(K key) {
-        hashMap.remove(key);
+    public V remove(K key) {
+        if(hashMap.containsKey(key)){
+            return hashMap.remove(key);
+        } else {
+            return null;
+        }
     }
 
     @Override
