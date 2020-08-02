@@ -1,6 +1,8 @@
 package cz.mg.collections.map;
 
 import cz.mg.collections.Collection;
+import cz.mg.collections.list.List;
+import cz.mg.collections.list.ReadableList;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,5 +64,9 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
                 return iterator.next();
             }
         };
+    }
+
+    public ReadableList<K> keys(){
+        return new List<>(hashMap.keySet());
     }
 }
