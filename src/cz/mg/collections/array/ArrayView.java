@@ -1,6 +1,6 @@
 package cz.mg.collections.array;
 
-public class ArrayView<T> implements ReadableArray {
+public class ArrayView<T> implements ReadableArray<T> {
     private final ReadableArray<T> array;
     private final int begin;
     private final int end;
@@ -12,7 +12,7 @@ public class ArrayView<T> implements ReadableArray {
     }
 
     @Override
-    public Object get(int i) {
+    public T get(int i) {
         int ii = begin + i;
         if(ii >= end) return null;
         if(ii < begin) return null;
