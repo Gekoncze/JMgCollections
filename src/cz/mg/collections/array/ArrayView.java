@@ -1,11 +1,11 @@
 package cz.mg.collections.array;
 
 public class ArrayView<T> implements ReadableArray {
-    private final Array<T> array;
+    private final ReadableArray<T> array;
     private final int begin;
     private final int end;
 
-    public ArrayView(Array<T> array, int begin, int end) {
+    public ArrayView(ReadableArray<T> array, int begin, int end) {
         this.array = array;
         this.begin = begin;
         this.end = end;
