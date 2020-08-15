@@ -2,20 +2,21 @@ package cz.mg.collections.list;
 
 import cz.mg.collections.Collection;
 import cz.mg.collections.array.Array;
+import cz.mg.collections.array.ReadableArray;
 
 
-public class CachedList<T> extends List<T> {
+public class ArrayList<T> extends List<T> implements ReadableArray<T> {
     private Array<ListItem<T>> array;
 
-    public CachedList() {
+    public ArrayList() {
     }
 
-    public CachedList(T... data) {
+    public ArrayList(T... data) {
         this();
         for(T d : data) addLast(d);
     }
     
-    public CachedList(Collection<T> collection) {
+    public ArrayList(Collection<T> collection) {
         this();
         for(T item : collection) addLast(item);
     }
