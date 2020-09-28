@@ -222,7 +222,7 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
         return result;
     }
 
-    public void addCollectionFirst(Iterable<T> collection){
+    public void addCollectionFirst(Iterable<? extends T> collection){
         ListItem<T> oldFirst = getFirstItem();
         if(oldFirst != null){
             for(T data : collection) {
@@ -233,7 +233,7 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
         }
     }
 
-    public void addCollectionLast(Iterable<T> collection){
+    public void addCollectionLast(Iterable<? extends T> collection){
         for(T data : collection) addLast(data);
     }
 
