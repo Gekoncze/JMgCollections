@@ -2,6 +2,7 @@ package cz.mg.collections.special;
 
 import cz.mg.collections.Clump;
 import cz.mg.collections.Collection;
+import cz.mg.collections.Pass;
 import cz.mg.collections.array.Array;
 
 import java.util.Iterator;
@@ -19,11 +20,11 @@ public class CompositeCollection<T> implements Clump<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Pass<T> iterator() {
         return new GlueIterator(clumps.iterator());
     }
 
-    private class GlueIterator implements Iterator<T> {
+    private class GlueIterator implements Pass<T> {
         private final Iterator<Clump<T>> iterators;
         private Iterator<T> currentIterator = null;
         private T current;

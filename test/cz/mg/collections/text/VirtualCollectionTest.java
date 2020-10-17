@@ -1,7 +1,7 @@
 package cz.mg.collections.text;
 
-import cz.mg.collections.special.VirtualCollection;
 import cz.mg.collections.list.List;
+import cz.mg.collections.special.VirtualCollection;
 
 
 public class VirtualCollectionTest {

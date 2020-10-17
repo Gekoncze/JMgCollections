@@ -1,6 +1,7 @@
 package cz.mg.collections.map;
 
 import cz.mg.collections.Collection;
+import cz.mg.collections.Pass;
 import cz.mg.collections.list.List;
 import cz.mg.collections.list.ReadableList;
 
@@ -49,8 +50,8 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
     }
 
     @Override
-    public Iterator<V> iterator() {
-        return new Iterator<V>() {
+    public Pass<V> iterator() {
+        return new Pass<V>() {
             private Iterator<V> iterator = hashMap.values().iterator();
 
             @Override

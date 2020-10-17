@@ -1,9 +1,9 @@
 package cz.mg.collections.array.multidimensional;
 
 import cz.mg.collections.Collection;
+import cz.mg.collections.Pass;
 import cz.mg.collections.ReadableCollection;
 import cz.mg.collections.array.Array;
-import java.util.Iterator;
 
 
 public class Array2D<T> implements ReadableArray2D<T>, WriteableArray2D<T>, Collection<T> {
@@ -66,7 +66,7 @@ public class Array2D<T> implements ReadableArray2D<T>, WriteableArray2D<T>, Coll
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Pass<T> iterator() {
         return innerArray.iterator();
     }
 }

@@ -1,7 +1,7 @@
 package cz.mg.collections.list;
 
 import cz.mg.collections.Collection;
-import java.util.Iterator;
+import cz.mg.collections.Pass;
 
 
 public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T> {
@@ -182,8 +182,8 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
     }
 
     @Override
-    public final Iterator<T> iterator() {
-        return new Iterator<T>() {
+    public final Pass<T> iterator() {
+        return new Pass<T>() {
             private ListItem<T> current = firstItem;
 
             @Override

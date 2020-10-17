@@ -1,7 +1,7 @@
 package cz.mg.collections.array;
 
+import cz.mg.collections.Pass;
 import cz.mg.collections.ReadableCollection;
-import java.util.Iterator;
 
 
 public interface ReadableArray<T> extends ReadableCollection<T> {
@@ -16,8 +16,8 @@ public interface ReadableArray<T> extends ReadableCollection<T> {
     }
 
     @Override
-    public default Iterator<T> iterator() {
-        return new Iterator<T>() {
+    public default Pass<T> iterator() {
+        return new Pass<T>() {
             private int i = 0;
 
             @Override

@@ -1,6 +1,8 @@
 package cz.mg.collections.special;
 
 import cz.mg.collections.Clump;
+import cz.mg.collections.Pass;
+
 import java.util.Iterator;
 
 
@@ -15,11 +17,11 @@ public class FilteredCollection<T> implements Clump<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Pass<T> iterator() {
         return new FilterIterator(clump.iterator());
     }
 
-    private class FilterIterator implements Iterator<T> {
+    private class FilterIterator implements Pass<T> {
         private final Iterator<T> iterator;
         private T current;
 

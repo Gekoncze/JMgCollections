@@ -1,8 +1,8 @@
 package cz.mg.collections;
 
-import cz.mg.collections.text.Text;
 import cz.mg.collections.text.ReadableText;
 import cz.mg.collections.text.ReadonlyText;
+import cz.mg.collections.text.Text;
 
 
 public interface Clump<T> extends Iterable<T> {
@@ -115,4 +115,7 @@ public interface Clump<T> extends Iterable<T> {
             return new ReadonlyText("" + t);
         }
     };
+
+    @Override
+    public Pass<T> iterator();
 }
