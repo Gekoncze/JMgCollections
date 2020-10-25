@@ -118,4 +118,10 @@ public interface Clump<T> extends Iterable<T> {
 
     @Override
     public Pass<T> iterator();
+
+    public static int count(Clump clump){
+        int count = 0;
+        for(Object o : clump) count++;
+        return count;
+    }
 }
