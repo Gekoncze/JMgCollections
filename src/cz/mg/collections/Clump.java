@@ -13,6 +13,15 @@ public interface Clump<T> extends Iterable<T> {
         return false;
     }
 
+    public default int indexOf(T wanted){
+        int i = 0;
+        for(T data : this){
+            if(data == wanted) return i;
+            i++;
+        }
+        return -1;
+    }
+
     public default ReadableText toText(ReadableText delim) {
         return toText("", delim.toString(), "", DEFAULT_CONVERTER);
     }
