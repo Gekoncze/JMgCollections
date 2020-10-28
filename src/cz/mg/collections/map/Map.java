@@ -15,6 +15,12 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
     public Map() {
     }
 
+    public Map(Pair<K,V>... pairs){
+        for(Pair<K,V> pair : pairs){
+            set(pair.key, pair.value);
+        }
+    }
+
     @Override
     public V get(K key){
         return get(key, null);
@@ -69,5 +75,23 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
 
     public ReadableList<K> keys(){
         return new List<>(hashMap.keySet());
+    }
+
+    public static class Pair<K, V> {
+        private final K key;
+        private final V value;
+
+        public Pair(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
     }
 }
