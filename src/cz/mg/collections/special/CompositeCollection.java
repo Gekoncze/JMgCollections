@@ -9,13 +9,13 @@ import java.util.Iterator;
 
 
 public class CompositeCollection<T> implements Clump<T> {
-    private final Array<Clump<T>> clumps;
+    private final Array<Clump<? extends T>> clumps;
 
-    public CompositeCollection(Clump<T>... clumps) {
+    public CompositeCollection(Clump<? extends T>... clumps) {
         this.clumps = new Array<>(clumps);
     }
 
-    public CompositeCollection(Collection<Clump<T>> clumps) {
+    public CompositeCollection(Collection<Clump<? extends T>> clumps) {
         this.clumps = new Array<>(clumps);
     }
 
@@ -25,11 +25,11 @@ public class CompositeCollection<T> implements Clump<T> {
     }
 
     private class GlueIterator implements Pass<T> {
-        private final Iterator<Clump<T>> iterators;
-        private Iterator<T> currentIterator = null;
+        private final Iterator<Clump<? extends T>> iterators;
+        private Iterator<? extends T> currentIterator = null;
         private T current;
 
-        public GlueIterator(Iterator<Clump<T>> iterators) {
+        public GlueIterator(Iterator<Clump<? extends T>> iterators) {
             this.iterators = iterators;
             this.current = move();
         }
@@ -38,7 +38,7 @@ public class CompositeCollection<T> implements Clump<T> {
             while(true) {
                 if(currentIterator == null){
                     if(iterators.hasNext()){
-                        Clump<T> clump = iterators.next();
+                        Clump<? extends T> clump = iterators.next();
                         if(clump != null){
                             currentIterator = clump.iterator();
                         }
