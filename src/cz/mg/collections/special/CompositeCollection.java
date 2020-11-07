@@ -11,6 +11,7 @@ import java.util.Iterator;
 public class CompositeCollection<T> implements Clump<T> {
     private final Array<Clump<? extends T>> clumps;
 
+    @SafeVarargs
     public CompositeCollection(Clump<? extends T>... clumps) {
         this.clumps = new Array<>(clumps);
     }
