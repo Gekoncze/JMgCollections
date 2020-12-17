@@ -133,4 +133,11 @@ public interface Clump<T> extends Iterable<T> {
         for(Object o : clump) count++;
         return count;
     }
+
+    public static boolean contains(Clump clump, Object wanted){
+        for(Object object : clump){
+            if(object == wanted) return true;
+        }
+        return false;
+    }
 }
