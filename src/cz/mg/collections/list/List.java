@@ -96,8 +96,18 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
 
     @Override
     public void add(T data, int i) {
-        if(count() == 0 && i == 0) addFirst(data);
-        else getItem(i).addPrevious(data);
+        if(isEmpty()){
+            addFirst(data);
+        } else {
+            if(i < 0) i = 0;
+            if(i > count()) i = count();
+
+            if(i == count()){
+                addLast(data);
+            } else {
+                getItem(i).addPrevious(data);
+            }
+        }
     }
 
     @Override
