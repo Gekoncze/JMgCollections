@@ -16,7 +16,7 @@ public class ArrayList<T> extends List<T> implements ReadableArray<T> {
         for(T d : data) addLast(d);
     }
     
-    public ArrayList(Collection<T> collection) {
+    public ArrayList(Collection<? extends T> collection) {
         this();
         for(T item : collection) addLast(item);
     }

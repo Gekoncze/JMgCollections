@@ -12,7 +12,7 @@ public class ReadonlyArray<T> implements ReadableArray<T>, ReadonlyCollection<T>
         for(int i = 0; i < array.length; i++) this.array[i] = array[i];
     }
 
-    public ReadonlyArray(ReadableCollection<T> collection) {
+    public ReadonlyArray(ReadableCollection<? extends T> collection) {
         this.array = new Object[collection.count()];
         int i = 0;
         for(T item : collection){

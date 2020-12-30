@@ -16,7 +16,7 @@ public class Array<T> implements ReadableArray<T>, WriteableArray<T>, Collection
         for(int i = 0; i < array.length; i++) this.array[i] = array[i];
     }
     
-    public Array(ReadableCollection<T> collection) {
+    public Array(ReadableCollection<? extends T> collection) {
         this.array = new Object[collection.count()];
         int i = 0;
         for(T item : collection){

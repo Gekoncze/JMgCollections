@@ -16,7 +16,7 @@ public class List<T> implements ReadableList<T>, WriteableList<T>, Collection<T>
         for(T item : array) addLast(item);
     }
     
-    public List(Iterable<T> collection) {
+    public List(Iterable<? extends T> collection) {
         for(T item : collection) addLast(item);
     }
     

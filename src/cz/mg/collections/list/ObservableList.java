@@ -15,7 +15,7 @@ public class ObservableList<T> extends List<T> implements ObservableCollection<T
         super(array);
     }
 
-    public ObservableList(Collection<T> collection) {
+    public ObservableList(Collection<? extends T> collection) {
         super(collection);
     }
 
