@@ -5,7 +5,7 @@ import cz.mg.collections.text.Text;
 
 
 public class ToTextBuilder<T> {
-    private static final StringConverter DEFAULT_CONVERTER = object -> object == null ? "" : object.toString();
+    private static final Converter DEFAULT_CONVERTER = object -> object == null ? "" : object.toString();
 
     private final Clump<T> clump;
     private String prefix = "";
@@ -47,12 +47,7 @@ public class ToTextBuilder<T> {
         return this;
     }
 
-    public ToTextBuilder<T> convertString(StringConverter<T> converter){
-        this.converter = converter;
-        return this;
-    }
-
-    public ToTextBuilder<T> convertText(TextConverter<T> converter){
+    public ToTextBuilder<T> convert(Converter<T> converter){
         this.converter = converter;
         return this;
     }
@@ -77,16 +72,8 @@ public class ToTextBuilder<T> {
     }
 
     @FunctionalInterface
-    private interface Converter<T, TT> {
-        public TT convert(T object);
-    }
-
-    @FunctionalInterface
-    public interface StringConverter<T> extends Converter<T, String> {
-    }
-
-    @FunctionalInterface
-    public interface TextConverter<T> extends Converter<T, ReadableText> {
+    public interface Converter<T> {
+        public Object convert(T object);
     }
 
     private static String nullAsEmpty(Object text){
