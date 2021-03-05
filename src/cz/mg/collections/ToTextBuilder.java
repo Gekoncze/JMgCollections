@@ -52,11 +52,7 @@ public class ToTextBuilder<T> {
         return this;
     }
 
-    public String buildString(){
-        return buildText().toString();
-    }
-
-    public Text buildText(){
+    public Text build(){
         Text text = new Text();
         text.append(prefix);
 

@@ -155,7 +155,7 @@ public class ReadonlyText implements ReadableText {
         String[] parts = toString().split("_");
         List<String> r = new List<>();
         for(String part : parts) r.addLast(new ReadonlyText(part.toLowerCase()).upperFirst().toString());
-        return new ReadonlyText(r.toText().buildString());
+        return new ReadonlyText(r.toText().build());
     }
 
 //    public ReadonlyText camelToUpper(){
