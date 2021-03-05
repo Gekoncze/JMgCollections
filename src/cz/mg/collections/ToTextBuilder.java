@@ -47,12 +47,12 @@ public class ToTextBuilder<T> {
         return this;
     }
 
-    public ToTextBuilder<T> convert(StringConverter<T> converter){
+    public ToTextBuilder<T> convertString(StringConverter<T> converter){
         this.converter = converter;
         return this;
     }
 
-    public ToTextBuilder<T> convert(TextConverter<T> converter){
+    public ToTextBuilder<T> convertText(TextConverter<T> converter){
         this.converter = converter;
         return this;
     }
