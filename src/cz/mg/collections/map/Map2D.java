@@ -26,12 +26,12 @@ public class Map2D<K,V> implements Collection<V> {
         val2key.set(value, key);
     }
 
-    public void getValue(K key){
-        key2val.get(key);
+    public V getValue(K key){
+        return key2val.get(key);
     }
 
-    public void getKey(V value){
-        val2key.get(value);
+    public K getKey(V value){
+        return val2key.get(value);
     }
 
     @Override
