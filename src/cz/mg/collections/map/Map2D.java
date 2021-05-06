@@ -34,6 +34,24 @@ public class Map2D<K,V> implements Collection<V> {
         return val2key.get(value);
     }
 
+    public V getValueOrCreate(K key, ValueFactory<V> factory){
+        V value = key2val.get(key);
+        if(value == null) {
+            value = factory.create();
+            set(key, value);
+        }
+        return value;
+    }
+
+    public K getKeyOrCreate(V value, KeyFactory<K> factory){
+        K key = val2key.get(value);
+        if(key == null) {
+            key = factory.create();
+            set(key, value);
+        }
+        return key;
+    }
+
     @Override
     public int count() {
         return key2val.count();
@@ -48,5 +66,15 @@ public class Map2D<K,V> implements Collection<V> {
     public void clear() {
         key2val.clear();
         val2key.clear();
+    }
+
+    @FunctionalInterface
+    public interface ValueFactory<V>{
+        V create();
+    }
+
+    @FunctionalInterface
+    public interface KeyFactory<K>{
+        K create();
     }
 }
