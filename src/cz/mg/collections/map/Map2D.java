@@ -2,6 +2,7 @@ package cz.mg.collections.map;
 
 import cz.mg.collections.Collection;
 import cz.mg.collections.Pass;
+import cz.mg.collections.list.ReadableList;
 
 
 public class Map2D<K,V> implements Collection<V> {
@@ -50,6 +51,14 @@ public class Map2D<K,V> implements Collection<V> {
             set(key, value);
         }
         return key;
+    }
+
+    public ReadableList<K> getKeys(){
+        return key2val.keys();
+    }
+
+    public ReadableList<V> getValues(){
+        return val2key.keys();
     }
 
     @Override
