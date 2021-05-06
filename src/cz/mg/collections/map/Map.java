@@ -78,8 +78,8 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
     }
 
     public static class Pair<K, V> {
-        private final K key;
-        private final V value;
+        final K key;
+        final V value;
 
         public Pair(K key, V value) {
             this.key = key;
