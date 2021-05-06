@@ -18,6 +18,10 @@ public class Map2D<K,V> implements Collection<V> {
     }
 
     public void set(K key, V value){
+        K oldKey = val2key.get(value);
+        V oldVal = key2val.get(key);
+        key2val.remove(oldKey);
+        val2key.remove(oldVal);
         key2val.set(key, value);
         val2key.set(value, key);
     }
