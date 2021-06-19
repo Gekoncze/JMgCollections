@@ -1,9 +1,6 @@
 package cz.mg.collections;
 
 
-import cz.mg.collections.text.Text;
-
-
 public interface Clump<T> extends Iterable<T> {
     public default boolean contains(T wanted){
         for(T data : this){
