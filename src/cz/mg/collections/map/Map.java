@@ -32,6 +32,16 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
     }
 
     @Override
+    public boolean containsKey(K key){
+        return hashMap.containsKey(key);
+    }
+
+    @Override
+    public boolean containsValue(V value) {
+        return hashMap.containsValue(value);
+    }
+
+    @Override
     public void set(K key, V value){
         hashMap.put(key, value);
     }
