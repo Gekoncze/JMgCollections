@@ -12,8 +12,8 @@ public class Map2D<K,V> implements Collection<V> {
     public Map2D() {
     }
 
-    public Map2D(Map.Pair<K,V>... pairs){
-        for(Map.Pair<K,V> pair : pairs){
+    public Map2D(Pair<K,V>... pairs){
+        for(Pair<K,V> pair : pairs){
             set(pair.key, pair.value);
         }
     }

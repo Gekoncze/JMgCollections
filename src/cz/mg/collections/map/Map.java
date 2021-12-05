@@ -87,21 +87,11 @@ public class Map<K,V> implements ReadableMap<K,V>, WriteableMap<K,V>, Collection
         return new List<>(hashMap.keySet());
     }
 
-    public static class Pair<K, V> {
-        final K key;
-        final V value;
-
-        public Pair(K key, V value) {
-            this.key = key;
-            this.value = value;
+    public ReadableList<Pair<K,V>> pairs(){
+        List<Pair<K,V>> pairs = new List<>();
+        for(HashMap.Entry<K,V> entry : hashMap.entrySet()){
+            pairs.addLast(new Pair<>(entry.getKey(), entry.getValue()));
         }
-
-        public K getKey() {
-            return key;
-        }
-
-        public V getValue() {
-            return value;
-        }
+        return pairs;
     }
 }
